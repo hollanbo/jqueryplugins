@@ -11,40 +11,58 @@ $.fn.multitext = function () {
     var $multitext = this.find('input[type="text"][multitext]');
     var types;
 
-    this.on('keyup', 'input[type="text"][multitext="enter"]', function (e) {
-        var code = (e.keyCode || e.which);
+    this.on('keyup', 'input[type="text"][multitext]', function (e) {
         e.preventDefault();
 
-        if(code !== 13) {
-            return;
+        switch (this.getAttribute('multitext')) {
+            case 'input':
+                input(this);
+                break;
+
+            case 'both':
+                both(this, e);
+                break;
+
+            default:
+                enter(this, e);
         }
-
-        clone($(this));
-    }).on('keyup', 'input[type="text"][multitext="input"]', function (e) {
-        var code = (e.keyCode || e.which);
-        e.preventDefault();
-
-        if(this.value.length === 0) {
-            return;
-        }
-
-        clone($(this), false);
     });
 
-    var clone = function ($elem, focus = true) {
-        console.log('whaaa');
-        if (
-            $elem.next('input[type="text"][multitext]').length > 0 ||
-            $elem.val().length === 0
-        ) {
-            return;
+    var enter = function (elem, e) {
+        var code = (e.keyCode || e.which);
+
+        if(code === 13) {
+            clone($(elem));
+        }
+    }
+
+    var input = function (elem) {
+        if(elem.value.length > 0) {
+            clone($(elem), false);
+        }
+    }
+
+    var both = function (elem, e) {
+        var code = (e.keyCode || e.which);
+
+        if(code === 13) {
+            return clone($(elem));
         }
 
-        var $new = $elem.clone().val("");
-        $elem.after($new);
+        if(elem.value.length > 0) {
+            clone($(elem), false);
+        }
+    }
+
+    var clone = function ($elem, focus = true) {
+        var $next = $elem.next('input[type="text"][multitext]');
+        if ($next.length === 0 && $elem.val().length > 0) {
+            $next = $elem.clone().val("");
+            $elem.after($next);
+        }
 
         if (focus) {
-            $new.focus();
+            $next.focus();
         }
     }
 }
