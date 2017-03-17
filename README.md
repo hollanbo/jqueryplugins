@@ -1,6 +1,6 @@
 # jQuery Plugins
 ### General setup
-Just include the desired .js file after the jQuery link, preferably in the <head> of the document.
+Just include the desired .js file after the jQuery link, preferably in the &lt;head&gt; of the document.
 
 ## Multitext
 Multitext is a jQuery plugin which replaces multi-line textarea or text fields by automatically appending new inputs when the previous has been filled or when enter is pressed, depending on your design.
