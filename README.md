@@ -8,9 +8,9 @@ Multitext is a jQuery plugin which replaces multi-line textarea or text fields b
 ### Usage
 1. Add the multitext="enter|input|both" attribute to your text inputs and place them in the desired container.
 Make sure to define the name of your input as an array, so the server receives all lines and not just the last one.
-enter: appends a new input when enter is pressed and focuses on that element
-input: appends a new input when the last element has content without focusing on that element
-both: appends a new input when the last element has content and focuses on that element
+    * enter: appends a new input when enter is pressed and focuses on that element
+    * input: appends a new input when the last element has content without focusing on that element
+    * both: appends a new input when the last element has content and focuses on that element
 
 ```html
 <div class="container">
